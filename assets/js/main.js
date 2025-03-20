@@ -610,3 +610,94 @@ document.getElementById("stateSelect").addEventListener("change", function () {
 });
 
 // Add Section End
+
+
+
+// LOCAL MANDI JS CODE START
+
+
+
+function fetchMandiRates() {
+    const state = document.getElementById("state").value;
+    const crop = document.getElementById("crop").value;
+    
+    // Simulated API response with multiple districts for the same crop
+    const mandiRates = {
+        "Telangana": { 
+            "Onion": [
+                { district: "రంగారెడ్డి", mandi: "కూకట్‌పల్లి", min: 20, max: 40, avg: 30 },
+                { district: "మెదక్", mandi: "వంటమామిడి", min: 18, max: 38, avg: 28 }
+            ],
+            "Chicken": [
+                { district: "వరంగల్", mandi: "వరంగల్", min: 100, max: 150, avg: 125 }
+            ],
+            "Egg": [
+                { district: "రంగారెడ్డి", mandi: "శంకరపల్లి", min: 5, max: 7, avg: 6 }
+            ]
+        },
+        "Andhra Pradesh": { 
+            "Tomato": [
+                { district: "చిత్తూరు", mandi: "పలమనేరు", min: 20, max: 40, avg: 30 },
+                { district: "విశాఖపట్నం", mandi: "అనకాపల్లి", min: 18, max: 38, avg: 28 }
+            ],
+            "Chicken": [
+                { district: "చిత్తూరు", mandi: "అనకాపల్లి", min: 100, max: 150, avg: 125 }
+            ],
+            "Egg": [
+                { district: "విశాఖపట్నం", mandi: "అమృత్‌సర్ మండి", min: 5, max: 7, avg: 6 }
+            ]
+        },
+        "Maharashtra": { 
+            "Tomato": [
+                { district: "పూణె", mandi: "మార్కెట్ యార్డ్", min: 20, max: 40, avg: 30 },
+                { district: "నాసిక్", mandi: "నాసిక్ మండి", min: 18, max: 38, avg: 28 }
+            ],
+            "Chicken": [
+                { district: "ముంబై", mandi: "దాదర్ మార్కెట్", min: 100, max: 150, avg: 125 }
+            ],
+            "Egg": [
+                { district: "అమృత్‌సర్", mandi: "అమృత్‌సర్ మండి", min: 5, max: 7, avg: 6 }
+            ]
+        },
+        "Punjab": { 
+            "Onion": [
+                { district: "లూధియానా", mandi: "లూధియానా మండి", min: 25, max: 50, avg: 37 }
+            ],
+            "Egg": [
+                { district: "అమృత్‌సర్", mandi: "అమృత్‌సర్ మండి", min: 5, max: 7, avg: 6 }
+            ],
+            "Chicken": [
+                { district: "ముంబై", mandi: "దాదర్ మార్కెట్", min: 100, max: 150, avg: 125 }
+            ]
+        },
+        "Karnataka": { 
+            "Potato": [
+                { district: "బెంగళూరు", mandi: "KR మార్కెట్", min: 15, max: 35, avg: 25 }
+            ],
+            "Chicken": [
+                { district: "ముంబై", mandi: "దాదర్ మార్కెట్", min: 100, max: 150, avg: 125 }
+            ]
+        }
+    };
+    
+    const resultTable = document.getElementById("resultTable").getElementsByTagName("tbody")[0];
+    resultTable.innerHTML = "";
+    
+    if (mandiRates[state] && mandiRates[state][crop]) {
+        const ratesList = mandiRates[state][crop];
+        ratesList.forEach(rates => {
+            const row = `<tr>
+                            <td>${rates.district}</td>
+                            <td>${rates.mandi}</td>
+                            <td>${rates.min} .00</td>
+                            <td>${rates.max} .00</td>
+                            <td>${rates.avg} .00</td>
+                        </tr>`;
+            resultTable.innerHTML += row;
+        });
+    } else {
+        resultTable.innerHTML = `<tr><td colspan="5">డేటా అందుబాటులో లేదు</td></tr>`;
+    }
+}
+
+// LOCAL MANDI JS CODE END
